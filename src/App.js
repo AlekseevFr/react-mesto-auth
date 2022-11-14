@@ -1,25 +1,29 @@
 import './index.css';
-import logo from './logo.svg';
+import logo from './images/logo.svg';
+import kusto from './images/image.jpg';
+import karandash from './images/Karandash.svg';
+import plus from './images/Plus.svg';
+import edit from './images/avatar.svg';
 
 function App() {
   return (
     
     <div className="page">
     <header className="header">
-      <img className="header__logo" src="./images/logo.svg" alt="Надпись Место, Россия"></img>
+      <img className="header__logo" src={logo} alt="Надпись Место, Россия"></img>
     </header>
     <main className="main">
       <section className="profile">
         <button className="profile__edit-avatar">
-          <img className="profile__avatar" src="./images/image.jpg" alt="Ив Кусто улыбается"></img>
-          <img className="profile__avatar-edit" src="./images/avatar.svg"></img>
+          <img className="profile__avatar" src={kusto} alt="Ив Кусто улыбается"></img>
+          <img className="profile__avatar-edit" src={edit}></img>
       </button>
       <div className="profile__info">
         <h1 className="profile__title">Жак-Ив Кусто</h1>
-        <button type="button" className="profile__edit-button"><img src="./images/Karandash.svg" alt="Карандаш"></img></button>
+        <button type="button" className="profile__edit-button"><img src={karandash} alt="Карандаш"></img></button>
         <p className="profile__subtitle">Исследователь океана</p>
       </div>
-      <button type="button" className="add-button"><img className="add-button__icon" src="./images/Plus.svg" alt="Плюсик"></img></button>
+      <button type="button" className="add-button"><img className="add-button__icon" src={plus} alt="Плюсик"></img></button>
     </section>
     <ul className="elements">
       <template id="element-template">
