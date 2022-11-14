@@ -1,5 +1,5 @@
+import './index.css';
 import logo from './logo.svg';
-
 
 function App() {
   return (
@@ -42,18 +42,18 @@ function App() {
     <div className="popupProfile__overlay">
       <div className="popupProfile__container">
         <h2 className="popupProfile__title">Редактировать профиль</h2>
-        <form name="profile-form" className="popupProfile__form popupProfile__form_type_edit" novalidate>
-          <label for="name-input" className="popupProfile__label">
-            <input type="text" placeholder="Имя" name="name" className="popupProfile__input popupProfile__input_type_name" id="name-input" minlength="2" maxlength="40" required></input>
+        <form name="profile-form" className="popupProfile__form popupProfile__form_type_edit" noValidate>
+          <label htmlFor="name-input" className="popupProfile__label">
+            <input type="text" placeholder="Имя" name="name" className="popupProfile__input popupProfile__input_type_name" id="name-input" minLength="2" maxLength="40" required></input>
             <span id="input-name-error" className="popupProfile__input-error name-input-error"></span>
           </label>
-          <label for="about-input" className="popupProfile__label">
-            <input type="text" placeholder="Профессия" name="about" className="popupProfile__input popupProfile__input_type_about" id="about-input" minlength="2" maxlength="200" required></input>
+          <label htmlFor="about-input" className="popupProfile__label">
+            <input type="text" placeholder="Профессия" name="about" className="popupProfile__input popupProfile__input_type_about" id="about-input" minLength="2" maxLength="200" required></input>
             <span id="input-about-error" className="popupProfile__input-error about-input-error"></span>
           </label>
           <button className="popupProfile__button popupProfile__button_type-load" type="submit">Сохранить</button>
         </form>
-        <button type="button" className="popupProfile__close-button popupProfile__close-button_type_card"><img class="popupProfile__close-image" src="./images/Close-Icon.svg" alt="Крестик закрытия"></img> </button>
+        <button type="button" className="popupProfile__close-button popupProfile__close-button_type_card"><img className="popupProfile__close-image" src="./images/Close-Icon.svg" alt="Крестик закрытия"></img> </button>
       </div>
     </div>
   </div>
@@ -61,12 +61,12 @@ function App() {
     <div className="popupProfile__overlay">
       <div className="popupProfile__container">
         <h2 className="popupProfile__title">Новое место</h2>
-        <form name="new-item-form" className="popupProfile__form popupProfile__form_type_add" novalidate>
-          <label for="addname-input" class="popupProfile__label">
-            <input type="text" placeholder="Название" name="name" className="popupProfile__input popupProfile__input_type_add-name" id="addname-input" minlength="2" maxlength="30" required></input>
-            <span id="input-addname-error" class="popupProfile__input-error addname-input-error"></span>
+        <form name="new-item-form" className="popupProfile__form popupProfile__form_type_add" noValidate>
+          <label htmlFor="addname-input" className="popupProfile__label">
+            <input type="text" placeholder="Название" name="name" className="popupProfile__input popupProfile__input_type_add-name" id="addname-input" minLength="2" maxLength="30" required></input>
+            <span id="input-addname-error" className="popupProfile__input-error addname-input-error"></span>
           </label>
-          <label for="url-input" className="popupProfile__label">
+          <label htmlFor="url-input" className="popupProfile__label">
             <input type="url" placeholder="Ссылка на картинку" name="link" className="popupProfile__input popupProfile__input_type_link" id="url-input" required></input>
             <span id="input-url-error" className="popupProfile__input-error url-input-error"></span>
           </label>
@@ -89,7 +89,7 @@ function App() {
     <div className="popupProfile__overlay">
       <div className="popupProfile__container-del">
         <h2 className="popupProfile__title">Вы уверены?</h2>
-        <form className="popupProfile__form popupProfile__form_type_del" action="" name="" novalidate>
+        <form className="popupProfile__form popupProfile__form_type_del" action="" name="" noValidate>
           <button className="popupProfile__button popupProfile__button_type-load" type="submit">Да</button>
         </form>
         <button type="button" className="popupProfile__close-button popupProfile__close-button_type_del"><img className="popupProfile__close-image" src="./images/Close-Icon.svg" alt="Крестик закрытия"></img></button>
@@ -101,14 +101,14 @@ function App() {
     <div className="popupProfile__overlay">
       <div className="popupProfile__container-ava">
         <h2 className="popupProfile__title">Обновить аватар</h2>
-        <form name="new-item-form" className="popupProfile__form popupProfile__form_type_edit-avatar" novalidate>
-          <label for="url-input" className="popupProfile__label">
+        <form name="new-item-form" className="popupProfile__form popupProfile__form_type_edit-avatar" noValidate>
+          <label htmlFor="url-input" className="popupProfile__label">
             <input type="url" placeholder="Ссылка на картинку" name="link" className="popupProfile__input popupProfile__input_type_link" id="url-input-ava" required></input>
             <span id="input-url-error-ava" className="popupProfile__input-error url-input-ava-error"></span>
           </label>
-          <button class="popupProfile__button popupProfile__button_type-load" type="submit">Сохранить</button>
+          <button className="popupProfile__button popupProfile__button_type-load" type="submit">Сохранить</button>
         </form>
-        <button type="button" class="popupProfile__close-button popupProfile__close-button_type_edit-avatar"><img class="popupProfile__close-image" src="./images/Close-Icon.svg" alt="Крестик закрытия"></img></button>
+        <button type="button" className="popupProfile__close-button popupProfile__close-button_type_edit-avatar"><img className="popupProfile__close-image" src="./images/Close-Icon.svg" alt="Крестик закрытия"></img></button>
       </div>
     </div>
   </div>
