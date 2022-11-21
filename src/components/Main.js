@@ -1,33 +1,43 @@
-import kusto from '../images/image.jpg';
+
 import React from 'react';
 import karandash from '../images/Karandash.svg';
 import plus from '../images/Plus.svg';
 import edit from '../images/avatar.svg';
+import basket from '../images/basket.svg';
 import Footer from  './Footer.js';
 import api from "../utils/Api.js";
 
 function Main(props) {
-
+  
   const [userName, setUserName] = React.useState('. . .');
   const [userDescription, setUserDescription ] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('#');
   const [cards, setCards] = React.useState([]);
-  
+  const [currentId, setCurrentId] = React.useState();
+  const handleDelete = (id) => {
+    api.deleteCard(id).then(() => {
+      const filteredCards = cards.filter(({ _id }) => id !== id);
+      setCards(filteredCards);
+    })
+  }
+ 
   React.useEffect(() => {
     api.getUserInfo()
       .then(res => {
         setUserName(res.name);
         setUserDescription(res.about);
         setUserAvatar(res.avatar);
+        setCurrentId(res.currentId)
       })
       .catch(err => console.error(err));
       api.getInitialCards()
       .then(res => {
         setCards(res);
       })
-      .catch(err => console.error(err));
+      
   }, []);
   console.log(cards)
+
   
   return (
     <main className="main">
@@ -44,10 +54,14 @@ function Main(props) {
       <button type="button" className="add-button" onClick={props.onAddPlace}><img className="add-button__icon" src={plus} alt="Плюсик"></img></button>
     </section>
     <ul className="elements">
-      <template id="element-template">
+      
       {cards.map(card => (
         <li className="element" key={card._id}>
-          <button type="button" className="element__basket-button"><img src="./images/basket.svg" alt="Мусорная корзина"></img></button>
+          <button
+            type="button"
+            className={`element__basket-button ${currentId === card.ownerId ? 'element__basket-button_show' : ''}`}
+            onClick={() => handleDelete(card._id)}
+          ></button>
           <img className="element__image" src={card.link} alt={card.name}></img>
           <div className="element__downbar">
             <h2 className="element__title">{card.name}</h2>
@@ -56,7 +70,7 @@ function Main(props) {
           </div>
         </li>
       ))}
-      </template>
+      
     </ul>
     
     <Footer />
