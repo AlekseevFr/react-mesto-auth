@@ -10,6 +10,7 @@ function App() {
   const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setselectedCard] = React.useState();
 
   function handleEditAvatarClick() {
     setisEditAvatarPopupOpen(true);
@@ -22,11 +23,16 @@ function App() {
   function handleAddPlaceClick() {
     setisAddPlacePopupOpen(true);
   }
+  function handleCardClick(card) {
+    setselectedCard(card);
+    
+  }
 
   function closeAllPopups() {
     setisEditProfilePopupOpen(false);
     setisAddPlacePopupOpen(false);
     setisEditAvatarPopupOpen(false);
+    setselectedCard(null);
   }
 
   return (
@@ -36,6 +42,7 @@ function App() {
       onEditProfile={handleEditProfileClick}
       onAddPlace={handleAddPlaceClick}
       onEditAvatar={handleEditAvatarClick}
+      onCardClick={handleCardClick}
       />
       <PopupWithForm name="edit-card" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
         <label htmlFor="name-input" className="popupProfile__label">
@@ -46,6 +53,7 @@ function App() {
           <input type="text" placeholder="Профессия" name="about" className="popupProfile__input popupProfile__input_type_about" id="about-input" minLength="2" maxLength="200" required></input>
           <span id="input-about-error" className="popupProfile__input-error about-input-error"></span>
         </label>
+        <button className="popupProfile__button popupProfile__button_type-load" type="submit">Сохранить</button>
       </PopupWithForm>
 
       <PopupWithForm name="add-card" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
@@ -57,6 +65,7 @@ function App() {
           <input type="url" placeholder="Ссылка на картинку" name="link" className="popupProfile__input popupProfile__input_type_link" id="url-input" required></input>
           <span id="input-url-error" className="popupProfile__input-error url-input-error"></span>
         </label>
+        <button className="popupProfile__button popupProfile__button_type-load" type="submit">Создать</button>
       </PopupWithForm>
 
       <PopupWithForm name="confirm" title="Вы уверены?"/>
@@ -66,9 +75,9 @@ function App() {
           <input type="url" placeholder="Ссылка на картинку" name="link" className="popupProfile__input popupProfile__input_type_link" id="url-input-ava" required></input>
           <span id="input-url-error-ava" className="popupProfile__input-error url-input-ava-error"></span>
         </label>
-
+        <button className="popupProfile__button popupProfile__button_type-load" type="submit">Сохранить</button>
       </PopupWithForm>
-      <ImagePopup onClose={closeAllPopups} />
+      <ImagePopup onClose={closeAllPopups}  card={selectedCard} isOpen={Boolean(selectedCard)}/>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import edit from '../images/avatar.svg';
 import basket from '../images/basket.svg';
 import Footer from  './Footer.js';
 import api from "../utils/Api.js";
+import Card from "./Card";
 
 function Main(props) {
   
@@ -14,12 +15,7 @@ function Main(props) {
   const [userAvatar, setUserAvatar] = React.useState('#');
   const [cards, setCards] = React.useState([]);
   const [currentId, setCurrentId] = React.useState();
-  const handleDelete = (id) => {
-    api.deleteCard(id).then(() => {
-      const filteredCards = cards.filter(({ _id }) => id !== id);
-      setCards(filteredCards);
-    })
-  }
+  
  
   React.useEffect(() => {
     api.getUserInfo()
@@ -56,23 +52,11 @@ function Main(props) {
     <ul className="elements">
       
       {cards.map(card => (
-        <li className="element" key={card._id}>
-          <button
-            type="button"
-            className={`element__basket-button ${currentId === card.ownerId ? 'element__basket-button_show' : ''}`}
-            onClick={() => handleDelete(card._id)}
-          ></button>
-          <img className="element__image" src={card.link} alt={card.name}></img>
-          <div className="element__downbar">
-            <h2 className="element__title">{card.name}</h2>
-            <button type="button" className="element__button"></button>
-            <p className="element__counter"></p>
-          </div>
-        </li>
+        <Card key={card._id} card={card} onCardClick={props.onCardClick}/>
       ))}
       
     </ul>
-    
+
     <Footer />
   </main>
   )
