@@ -9,6 +9,7 @@ function PopupWithForm(props) {
         <h2 className="popupProfile__title">{props.title}</h2>
         <form name={props.name} className="popupProfile__form popupProfile__form_type_edit" noValidate>
         {props.children}
+        <button className="popupProfile__button popupProfile__button_type-load" type="submit">{props.buttonText}</button>
         </form>
         <button type="button" className="popupProfile__close-button popupProfile__close-button_type_card" onClick={props.onClose}><img className="popupProfile__close-image" src={Close} alt="Крестик закрытия"></img> </button>
       </div>

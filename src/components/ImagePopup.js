@@ -4,7 +4,7 @@ function ImagePopup(props) {
 
 
   return (
-    <div className={'popupProfile popupProfile_type_img' + (props.isOpen && ' popupProfile_opened')}>
+    <div className={'popupProfile popupProfile_type_img' + (props.isOpen && ' popupProfile_opened')}> // Такие названия классов меня попросил сделать один из ревьюеров, почему-то просто попап не подошел. 
     <div className="popupProfile__overlay">
       <div className="popupProfile__container-img">
         <img className="popupProfile__img" src={props.card?.link} alt={props.card?.name}></img>
