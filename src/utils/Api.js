@@ -1,3 +1,4 @@
+
 class Api {
   constructor({ baseUrl, headers }) {
       this.baseUrl = baseUrl;
@@ -59,6 +60,15 @@ unlikeCard(id) {
       })
       .then(this._responseTransform)
 }
+changeLikeCardStatus(id, isLiked) {
+  if (isLiked) {
+    return this.unlikeCard(id);
+  } else {
+    return this.likeCard(id);
+  }
+}
+
+
 changeAvatar(avatar) {
   return fetch(`${this.baseUrl}users/me/avatar`, {
           method: 'PATCH',

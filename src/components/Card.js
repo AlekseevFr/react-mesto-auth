@@ -1,20 +1,31 @@
-function Card(props) {
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import React from "react";
+
+function Card({card, onCardClick, onCardLike}) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+  const isLiked = card.likes.some(i => i._id === currentUser._id);
+  const cardLikeButtonClassName = 'element__button_active';
 
   function handleCardClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
+  }
+  function handleCardLike() {
+    onCardLike(card);
   }
 
   return (
   <li className="element">
+     {isOwn && (
   <button
     type="button"
-    className={`element__basket-button ${props.currentId === props.card.ownerId ? 'element__basket-button_show' : ''}`}
-  ></button>
-  <img className="element__image" src={props.card.link} alt={props.card.name} onClick={handleCardClick}></img>
+    className="element__basket-button"
+  ></button> )}
+  <img className="element__image" src={card.link} alt={card.name} onClick={handleCardClick}></img>
   <div className="element__downbar">
-    <h2 className="element__title">{props.card.name}</h2>
-    <button type="button" className="element__button"></button>
-    <p className="element__counter">{props.card.likes.length}</p>
+    <h2 className="element__title">{card.name}</h2>
+    <button type="button" onClick={handleCardLike} className={'element__button' + (isLiked ? cardLikeButtonClassName: '')}></button>
+    <p className="element__counter">{card.likes.length}</p>
   </div>
 </li>
 )}
