@@ -73,7 +73,7 @@ changeAvatar(avatar) {
   return fetch(`${this.baseUrl}users/me/avatar`, {
           method: 'PATCH',
           headers: this.headers,
-          body: JSON.stringify ({ avatar: avatar.link}),
+          body: JSON.stringify ({avatar}),
       })
       .then(this._responseTransform)
 }

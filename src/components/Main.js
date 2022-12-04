@@ -5,43 +5,15 @@ import plus from '../images/Plus.svg';
 import edit from '../images/avatar.svg';
 import basket from '../images/basket.svg';
 import Footer from  './Footer.js';
-import api from "../utils/Api.js";
 import Card from "./Card";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete}) {
 
-  const [cards, setCards] = React.useState([]);
+  
   const currentUser = React.useContext(CurrentUserContext);
   
- 
-  React.useEffect(() => {
-      api.getInitialCards()
-      .then(res => {
-        setCards(res);
-      })
-      
-  }, []);
 
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
-} 
-function handleCardDelete(card) {
-  const idCard = card._id;
-  api.deleteCard(idCard)
-  .then(() => {
-    setCards((state) => state.filter(card => card._id !== idCard));
-  })
-  .catch(console.error);
-}
-
-  
   return (
     <main className="main">
       <section className="profile">
@@ -59,8 +31,11 @@ function handleCardDelete(card) {
     <ul className="elements">
       
       {cards.map(card => (
-        <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={handleCardLike}
-        onCardDelete = {handleCardDelete}/>
+        <Card key={card._id} 
+        card={card} 
+        onCardClick={onCardClick} 
+        onCardLike={onCardLike}
+        onCardDelete = {onCardDelete}/>
       ))}
       
     </ul>
