@@ -28,11 +28,18 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      console.log(newCard)
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
 } 
+function handleCardDelete(card) {
+  const idCard = card._id;
+  api.deleteCard(idCard)
+  .then(() => {
+    setCards((state) => state.filter(card => card._id !== idCard));
+  })
+  .catch(console.error);
+}
 
   
   return (
@@ -52,7 +59,8 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
     <ul className="elements">
       
       {cards.map(card => (
-        <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={handleCardLike}/>
+        <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={handleCardLike}
+        onCardDelete = {handleCardDelete}/>
       ))}
       
     </ul>
