@@ -1,5 +1,6 @@
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import React from "react";
+import basket from '../images/basket.svg';
 
 function Card({card, onCardClick, onCardLike, onCardDelete}) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -20,10 +21,11 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
   <li className="element">
      {isOwn && (
   <button
+  
     type="button"
     className="element__basket-button"
     onClick={handleDeleteClick}
-  ></button> )}
+  ><img src={basket}></img></button> )}
   <img className="element__image" src={card.link} alt={card.name} onClick={handleCardClick}></img>
   <div className="element__downbar">
     <h2 className="element__title">{card.name}</h2>
