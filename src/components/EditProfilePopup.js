@@ -11,7 +11,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]); 
+  }, [currentUser, isOpen]);
 
   function handleChangeName(e) {
     setName(e.target.value);
@@ -21,23 +21,37 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdateUser({
-      name,
-      about: description,
-    });
-  } 
+    onUpdateUser({name, about: description});
+  }
   return (
     <PopupWithForm name="edit-card" title="Редактировать профиль" buttonText="Сохранить"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}>
       <label htmlFor="name-input" className="popupProfile__label">
-        <input type="text" placeholder="Имя" name="name" onChange={handleChangeName} value={name} className="popupProfile__input popupProfile__input_type_name" id="name-input" minLength="2" maxLength="40" required
-          ></input>
+        <input type="text" placeholder="Имя" name="name"
+          onChange={handleChangeName}
+          value={
+            name || ''
+          }
+          className="popupProfile__input popupProfile__input_type_name"
+          id="name-input"
+          minLength="2"
+          maxLength="40"
+          required></input>
         <span id="input-name-error" className="popupProfile__input-error name-input-error"></span>
       </label>
       <label htmlFor="about-input" className="popupProfile__label">
-        <input type="text" placeholder="Профессия" name="about" onChange={handleChangeDescription} value={description} className="popupProfile__input popupProfile__input_type_about" id="about-input" minLength="2" maxLength="200" required></input>
+        <input type="text" placeholder="Профессия" name="about"
+          onChange={handleChangeDescription}
+          value={
+            description || ''
+          }
+          className="popupProfile__input popupProfile__input_type_about"
+          id="about-input"
+          minLength="2"
+          maxLength="200"
+          required></input>
         <span id="input-about-error" className="popupProfile__input-error about-input-error"></span>
       </label>
 

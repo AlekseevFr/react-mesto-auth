@@ -1,47 +1,75 @@
-
 import React from 'react';
 import karandash from '../images/Karandash.svg';
 import plus from '../images/Plus.svg';
 import edit from '../images/avatar.svg';
 import basket from '../images/basket.svg';
-import Footer from  './Footer.js';
+import Footer from './Footer.js';
 import Card from "./Card";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete}) {
+function Main({
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+  cards,
+  onCardLike,
+  onCardDelete
+}) {
 
-  
   const currentUser = React.useContext(CurrentUserContext);
-  
 
   return (
     <main className="main">
       <section className="profile">
-        <button className="profile__edit-avatar" onClick={onEditAvatar}>
-          <img className="profile__avatar" src={currentUser.avatar} alt="Загруженное фото"></img>
-          <img className="profile__avatar-edit" src={edit}></img>
-      </button>
-      <div className="profile__info">
-        <h1 className="profile__title">{currentUser.name}</h1>
-        <button type="button" className="profile__edit-button" onClick={onEditProfile}><img src={karandash} alt="Карандаш"></img></button>
-        <p className="profile__subtitle">{currentUser.about}</p>
-      </div>
-      <button type="button" className="add-button" onClick={onAddPlace}><img className="add-button__icon" src={plus} alt="Плюсик"></img></button>
-    </section>
-    <ul className="elements">
-      
-      {cards.map(card => (
-        <Card key={card._id} 
-        card={card} 
-        onCardClick={onCardClick} 
-        onCardLike={onCardLike}
-        onCardDelete = {onCardDelete}/>
-      ))}
-      
-    </ul>
+        <button className="profile__edit-avatar"
+          onClick={onEditAvatar}>
+          <img className="profile__avatar"
+            src={
+              currentUser.avatar
+            }
+            alt="Загруженное фото"></img>
+          <img className="profile__avatar-edit"
+            src={edit}></img>
+        </button>
+        <div className="profile__info">
+          <h1 className="profile__title">
+            {
+            currentUser.name
+          }</h1>
+          <button type="button" className="profile__edit-button"
+            onClick={onEditProfile}>
+            <img src={karandash}
+              alt="Карандаш"></img>
+          </button>
+          <p className="profile__subtitle">
+            {
+            currentUser.about
+          }</p>
+        </div>
+        <button type="button" className="add-button"
+          onClick={onAddPlace}>
+          <img className="add-button__icon"
+            src={plus}
+            alt="Плюсик"></img>
+        </button>
+      </section>
+      <ul className="elements">
 
-    <Footer />
-  </main>
+        {
+        cards.map(card => (
+          <Card key={
+              card._id
+            }
+            card={card}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}/>
+        ))
+      } </ul>
+
+      <Footer/>
+    </main>
   )
 }
 
