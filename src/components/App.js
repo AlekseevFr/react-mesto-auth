@@ -52,26 +52,26 @@ function App() {
     api.editUser(info).then((newInfo) => {
       setCurrentUser(newInfo);
       closeAllPopups();
-    })
+    }).catch(console.error);
   }
   function handleUpdateAvatar({avatar}) {
     api.changeAvatar(avatar).then(newInfo => {
       setCurrentUser(newInfo);
-    })
+    }).catch(console.error);
   }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+    }).catch(console.error);
   }
 
   function handleCardDelete(card) {
     const idCard = card._id;
     api.deleteCard(idCard).then(() => {
       setCards((state) => state.filter(card => card._id !== idCard));
-    })
+    }).catch(console.error);
   }
 
   function handleAddPlace(newPlace) {
@@ -81,7 +81,7 @@ function App() {
         ...state
       ]);
       closeAllPopups();
-    })
+    }).catch(console.error);
   }
 
   return (
