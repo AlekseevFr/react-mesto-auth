@@ -84,6 +84,7 @@ _responseTransform(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 }
+
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/cohort-46/',
   headers: {
