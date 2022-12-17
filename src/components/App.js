@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Route, Redirect, Link} from "react-router-dom";
+import {BrowserRouter, Route, Redirect, Link, Switch} from "react-router-dom";
 import Cards from "./Cards";
 import Login from "./Login";
 import Register from "./Register";
@@ -12,14 +12,13 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [type, setType] = React.useState(null);
   const [email, setEmail] = React.useState("");
-  console.log(email);
 
 function checkToken(token) {
   userapi.checkToken(token)
   .then((res) => {
     setEmail(res.data.email);
     setIsLoggedIn(true);
-  })
+  }).catch(console.error);
 }
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -53,6 +52,7 @@ function checkToken(token) {
       email={email}
       onLeave={handleLeave}
       component={Cards}/>
+      <Switch>
     <Route path="/sign-in">
       <Header>
         <Link to="/sign-up">Регистрация</Link>
@@ -66,6 +66,7 @@ function checkToken(token) {
       <Register onSubmit={handleRegister}/>
       <InfoTooltip type={type} onClose={handleClose}/>
     </Route>
+    </Switch>
   </BrowserRouter>)
 }
 export default App;

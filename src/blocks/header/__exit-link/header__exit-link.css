@@ -1,10 +1,13 @@
 .header__exit-link {
+  width: 56px;
+  height: 32px;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #A9A9A9;
-  margin-left: 24px;
-  margin-right: 100px;
   background-color: transparent;
+  padding:0px;
+  margin-top: -4px;
+  margin-left: 24px;
 }
